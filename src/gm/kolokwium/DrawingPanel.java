@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DrawingPanel extends JPanel {
     private final List<Oval> ovalsList;
@@ -16,7 +16,7 @@ public class DrawingPanel extends JPanel {
     private Image buffer;
 
     public DrawingPanel() {
-        ovalsList = new ArrayList<>();
+        ovalsList = new CopyOnWriteArrayList<>();
         setFocusable(true);
         setupKeysBindings();
         setupMouseListers();
@@ -88,10 +88,8 @@ public class DrawingPanel extends JPanel {
         bufferGraphics.setColor(getBackground());
         bufferGraphics.fillRect(0, 0, getWidth(), getHeight());
 
-        synchronized (ovalsList) {
-            for (Oval oval : ovalsList) {
-                oval.draw(bufferGraphics);
-            }
+        for (Oval oval : ovalsList) {
+            oval.draw(bufferGraphics);
         }
 
         g.drawImage(buffer, 0, 0, this);

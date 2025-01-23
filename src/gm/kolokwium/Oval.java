@@ -29,13 +29,14 @@ public class Oval implements Runnable {
 
     @Override
     public void run() {
+        moving = true;
         while(moving) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
+                moving = false;
                 e.printStackTrace();
             }
-
             moveOval(constUp, constRight);
         }
     }
@@ -43,7 +44,6 @@ public class Oval implements Runnable {
     public void moveOval(int up, int right) {
         constUp = up;
         constRight = right;
-        moving = true;
 
         x += right;
         y += up;
