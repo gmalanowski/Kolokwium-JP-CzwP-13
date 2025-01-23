@@ -78,6 +78,10 @@ public class DrawingPanel extends JPanel {
         }
     }
 
+    public List<Oval> getOvalsList() {
+        return ovalsList;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         if(buffer == null) {

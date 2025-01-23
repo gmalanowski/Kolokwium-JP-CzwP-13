@@ -60,6 +60,24 @@ public class Oval implements Runnable {
             y = 0;
         }
 
+        checkCollision();
+
         panel.repaint();
+    }
+
+    private void checkCollision() {
+        for(Oval other : panel.getOvalsList()) {
+            if(other != this && isColliding(other)) {
+                constUp = -constUp;
+                constRight = -constRight;
+            }
+        }
+    }
+
+    private boolean isColliding(Oval other) {
+        int dx = (x + width / 2) - (other.x + other.width / 2);
+        int dy = (y + height / 2) - (other.y + other.height / 2);
+        int distance = (int) Math.sqrt(dx * dx + dy * dy);
+        return distance < (width + other.width) / 2;
     }
 }
