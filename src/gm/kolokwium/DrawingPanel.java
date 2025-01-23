@@ -19,10 +19,10 @@ public class DrawingPanel extends JPanel {
         ovalsList = new CopyOnWriteArrayList<>();
         setFocusable(true);
         setupKeysBindings();
-        setupMouseListers();
+        setupMouseListeners();
     }
 
-    private void setupMouseListers() {
+    private void setupMouseListeners() {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

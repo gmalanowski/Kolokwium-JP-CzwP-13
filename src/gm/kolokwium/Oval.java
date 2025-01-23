@@ -32,7 +32,7 @@ public class Oval implements Runnable {
         moving = true;
         while(moving) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 moving = false;
                 e.printStackTrace();
@@ -48,12 +48,18 @@ public class Oval implements Runnable {
         x += right;
         y += up;
 
-        if(x < 0 || x + width > panel.getWidth()) {
+        if (x < 0) {
+            x = panel.getWidth() - width;
+        } else if (x + width > panel.getWidth()) {
             x = 0;
         }
-        if(y < 0 || y + height > panel.getHeight()) {
+
+        if (y < 0) {
+            y = panel.getHeight() - height;
+        } else if (y + height > panel.getHeight()) {
             y = 0;
         }
+
         panel.repaint();
     }
 }
