@@ -1,15 +1,18 @@
 package gm.kolokwium;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Oval implements Runnable {
     private int x, y, width, height;
     private int constUp, constRight;
     private boolean moving = false;
     private final DrawingPanel panel;
+    private final Color color;
 
     public Oval(int x, int y, int width, int height, DrawingPanel panel) {
         this.panel = panel;
+        this.color = getRandomColor();
         panel.setFocusable(true);
         initializeOval(x, y, width, height);
     }
@@ -21,9 +24,14 @@ public class Oval implements Runnable {
         this.height = height;
     }
 
+    private Color getRandomColor() {
+        Random rand = new Random();
+        return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+    }
+
     public void draw(Graphics g) {
         g.drawOval(x, y, width, height);
-        g.setColor(Color.red);
+        g.setColor(color);
         g.fillOval(x, y, width, height);
     }
 
